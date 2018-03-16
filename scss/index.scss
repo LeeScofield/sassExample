@@ -71,7 +71,7 @@ article {
   }
   nav + & { margin-top: 0 }
 }
-
+/*将属性分开*/
 nav {
   border: {
     style: solid;
@@ -87,6 +87,80 @@ nav {
   }
 }
 
+@import "home";
+/*导入的实际名称为_importFile.scss，sass文件名前加上下划线不会编译成css文件，引入时也不需要加下划线*/
+@import "importFile";
+
+/*默认值 ，如果有其它引入文件相同变量，会将其覆盖*/
+$fontSize:16px !default;
 
 
+font{
+  padding: 9px;
+  font-size: $fontSize;
+}
 
+/*import嵌套导入*/
+aside{
+  @import "importFile";
+}
+
+body {
+  color: #333; // 这种注释内容不会出现在生成的css文件中
+  padding: 0; /* 这种注释内容会出现在生成的css文件中 */
+}
+
+/*混合器*/
+@mixin rounder-corners{
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+notice{
+  @include rounder-corners;
+}
+/*混合器css */
+@mixin no-bullets {
+  list-style: none;
+  li {
+    list-style-image: none;
+    list-style-type: none;
+    margin-left: 0px;
+  }
+}
+ul.plain {
+  color: #444;
+  @include no-bullets;
+}
+
+/*混合器参数传值*/
+@mixin link-colors($normal, $hover, $visited) {
+  color: $normal;
+  &:hover { color: $hover; }
+  &:visited { color: $visited; }
+}
+
+/*
+a {
+  @include link-colors(blue, red, green);
+}
+*/
+
+a {
+  @include link-colors(
+          $normal: blue,
+          $visited: green,
+          $hover: red
+  );
+}
+/*继承*/
+.error {
+  border: 1px solid red;
+  background-color: #fdd;
+}
+/*这里继参后，会将error和seriousError相同属性绑定在同一个组中*/
+.seriousError {
+  @extend .error;
+  border-width: 3px;
+}

@@ -92,6 +92,7 @@ nav + article {
   margin-top: 0;
 }
 
+/*将属性分开*/
 nav {
   border-style: solid;
   border-width: 1px;
@@ -102,6 +103,84 @@ nav {
   border: 1px solid #ccc;
   border-left: 0px;
   border-right: 0px;
+}
+
+.haha {
+  background: gray;
+}
+
+/*导入的实际名称为_importFile.scss，sass文件名前加上下划线不会编译成css文件，引入时也不需要加下划线*/
+.hehe {
+  background: royalblue;
+}
+
+.haha {
+  background: #000;
+}
+
+/*默认值 ，如果有其它引入文件相同变量，会将其覆盖*/
+font {
+  padding: 9px;
+  font-size: 19px;
+}
+
+/*import嵌套导入*/
+aside .hehe {
+  background: royalblue;
+}
+aside .haha {
+  background: #000;
+}
+
+body {
+  color: #333;
+  padding: 0;
+  /* 这种注释内容会出现在生成的css文件中 */
+}
+
+/*混合器*/
+notice {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+/*混合器css */
+ul.plain {
+  color: #444;
+  list-style: none;
+}
+ul.plain li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0px;
+}
+
+/*混合器参数传值*/
+/*
+a {
+  @include link-colors(blue, red, green);
+}
+*/
+a {
+  color: blue;
+}
+a:hover {
+  color: red;
+}
+a:visited {
+  color: green;
+}
+
+/*继承*/
+.error, .seriousError {
+  border: 1px solid red;
+  background-color: #fdd;
+}
+
+/*这里继参后，会将error和seriousError相同属性绑定在同一个组中*/
+.seriousError {
+  border-width: 3px;
 }
 
 /*# sourceMappingURL=index.css.map */
