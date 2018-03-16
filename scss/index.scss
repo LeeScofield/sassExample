@@ -164,3 +164,64 @@ a {
   @extend .error;
   border-width: 3px;
 }
+
+/*尽量避免使用标签类继承，因为本css页面中所有的a标签属性都会叠加到该样式上*/
+.disabled {
+  color: gray;
+  @extend a;
+}
+
+/*if else*/
+@mixin backgroundNum($num){
+  @if($num == 1){
+    background: red;
+  }@else if($num == 2){
+    background: green;
+  }@else{
+    background: blue;
+  }
+}
+
+.test1{
+  @include backgroundNum(1);
+}
+.test2{
+  @include backgroundNum(2);
+}
+.test3{
+  @include backgroundNum(3);
+}
+
+/*for (from 1 to 3不包含3 from 1 through 3包含 3)*/
+@for $i from 1 to 3 {
+  .img#{$i}{
+    background:url("img/img#{$i}");
+  }
+}
+
+/*while 这里不能用++或--，$j - 1不能把空格省掉写成$j--，因为这是变量而不是运算*/
+$j:2;
+
+@while $j > 0{
+  .img_while_#{$j} {
+    background: url("img/img#{$j}");
+  }
+  $j:$j - 1;
+}
+
+/*each*/
+@each $k in a,b,c{
+  .img_each_#{$k} {
+    background: url("img/img#{$k}");
+  }
+}
+
+/*function 函数*/
+@function f_raba($r,$g,$b,$a){
+  @return rgba($r,$g,$b,$a);
+}
+
+.bg{
+  background: f_raba(255,255,255,0.5);
+}
+

@@ -8,7 +8,7 @@ nav {
   border: 1px solid #f90;
 }
 
-a {
+a, .disabled {
   color: blue;
 }
 
@@ -34,20 +34,20 @@ a {
 .art {
   color: blue;
 }
-.art a {
+.art a, .art .disabled {
   color: red;
 }
-.art a:hover {
+.art a:hover, .art .disabled:hover {
   color: yellow;
 }
 .art:hover {
   color: green;
 }
 
-article a {
+article a, article .disabled {
   color: blue;
 }
-article a:hover {
+article a:hover, article .disabled:hover {
   color: red;
 }
 
@@ -71,7 +71,7 @@ body.ie #content aside {
   margin-bottom: .8em;
 }
 
-nav a, aside a {
+nav a, nav .disabled, aside a, aside .disabled {
   color: blue;
 }
 
@@ -162,13 +162,13 @@ a {
   @include link-colors(blue, red, green);
 }
 */
-a {
+a, .disabled {
   color: blue;
 }
-a:hover {
+a:hover, .disabled:hover {
   color: red;
 }
-a:visited {
+a:visited, .disabled:visited {
   color: green;
 }
 
@@ -181,6 +181,60 @@ a:visited {
 /*这里继参后，会将error和seriousError相同属性绑定在同一个组中*/
 .seriousError {
   border-width: 3px;
+}
+
+/*尽量避免使用标签类继承，因为本css页面中所有的a标签属性都会叠加到该样式上*/
+.disabled {
+  color: gray;
+}
+
+/*if else*/
+.test1 {
+  background: red;
+}
+
+.test2 {
+  background: green;
+}
+
+.test3 {
+  background: blue;
+}
+
+/*for (from 1 to 3不包含3 from 1 through 3包含 3)*/
+.img1 {
+  background: url("img/img1");
+}
+
+.img2 {
+  background: url("img/img2");
+}
+
+/*while 这里不能用++或--，$j - 1不能把空格省掉写成$j--，因为这是变量而不是运算*/
+.img_while_2 {
+  background: url("img/img2");
+}
+
+.img_while_1 {
+  background: url("img/img1");
+}
+
+/*each*/
+.img_each_a {
+  background: url("img/imga");
+}
+
+.img_each_b {
+  background: url("img/imgb");
+}
+
+.img_each_c {
+  background: url("img/imgc");
+}
+
+/*function 函数*/
+.bg {
+  background: rgba(255, 255, 255, 0.5);
 }
 
 /*# sourceMappingURL=index.css.map */
